@@ -7,6 +7,7 @@ let luchando;
 let saludMonstruo;
 let inventario = ['palo'];
 
+let eleccionJugador;
 const boton1 = document.querySelector('#button1');
 const boton2 = document.querySelector('#button2');
 const boton3 = document.querySelector('#button3');
@@ -82,8 +83,8 @@ const locations = [
     },
     {
         name: "Kill Monster",
-        "button text": ["Volver a la plaza","Volver a la plaza","Volver a la plaza"],
-        "button functions":[goTown, goTown, goTown],
+        "button text": ["Volver a la plaza","Volver a la plaza","Opa, te gusta apostar?"],
+        "button functions":[goTown, goTown, tirarMoneda],
         text: "Derrotaste al monstruo! Se escucha un 'Argh!' a traves de las paredes de la cueva. Ganaste experiencia y oro."
     },
     {
@@ -97,6 +98,12 @@ const locations = [
         "button text": ["Volver a jugar?","Volver a jugar?","Volver a jugar?"],
         "button functions":[restart, restart, restart],
         text: "Mataste al jefe final! GANASTE!! "
+    },
+    { 
+        name: "cara o cruz", 
+        "button text": ["Cara?","Cruz?","No gracias, soy malo en el azar"], 
+        "button functions":[cara, cruz, goTown], 
+        text: "Queres jugar al cara o cruz? La apuesta vale 10 monedas. Si ganas te llevas 50. Y si perdes, perdes 20 de vida." 
     },
 ];
 
@@ -228,6 +235,51 @@ function matarMonstruo(){
     textoOro.innerText= oro;
     textoXp.innerText= exp;
     update(locations[4]);
+}
+
+
+function cara(){
+    jugarCaraCruz("cara")
+}
+
+function cruz(){
+    jugarCaraCruz("cruz")
+}
+
+function jugarCaraCruz(eleccionJugador){
+    boton1.disabled = true;
+    boton2.disabled = true;
+    boton3.disabled = true;
+    if (oro < 10) {
+        texto.innerText = "No tienes suficiente oro para jugar a cara o cruz.";
+        return;
+    }
+    
+    oro -= 10;
+    textoOro.innerText = oro;
+
+    const resultado = Math.random() < 0.5 ? "cara" : "cruz";
+    texto.innerText = `Lanzaste la moneda... ¡Salió ${resultado}!`;
+
+    if (eleccionJugador === resultado) {
+        oro += 50;
+        texto.innerText += " ¡Ganaste 50 monedas de oro!";
+    } else {
+        salud-= 20;
+        texto.innerText += " Que mal, perdiste...";
+    }
+    textoSalud.innerText = salud;
+    textoOro.innerText = oro;
+    setTimeout(() => {
+        boton1.disabled = false;
+        boton2.disabled = false;
+        boton3.disabled = false;
+    }, 3500);
+    setTimeout(goTown, 3500);
+}
+
+function tirarMoneda(){
+    update(locations[7]);
 }
 
 function perdiste(){
