@@ -11,12 +11,14 @@ body {
     display: flex; /* Usa flexbox para centrar verticalmente */
     justify-content: center; /* Centra horizontalmente */
     align-items: center; /* Centra verticalmente */
+    font-size: 18px;
 }
 
 #text {
     background-color: rgb(0, 0, 0);
     color: rgb(172, 172, 172);
-    padding: 10px;
+    padding: 30px;
+    font-size: 22px;
 }
 
 #game {
@@ -26,17 +28,24 @@ body {
     color: rgb(214, 214, 214);
     margin: 0 auto;
     padding: 10px;
+    font-size: 18px;
 }
 
 #controls {
     border: 1px black solid;
-    padding: 5px;
+    padding: 10px;
+}
+
+button{
+    padding: 12px 15px;
+    font-size: 18px;
 }
 
 #stats {
     border: 1px black solid;
     color: black;
     padding: 5px;
+    font-size: 18px;
 }
 
 #monsterStats {
@@ -49,4 +58,64 @@ body {
 
 .stat {
     padding-right: 10px;
+}
+
+/* Media Queries */
+
+/* Para pantallas más pequeñas y dispositivos móviles */
+@media (max-width: 720px) {
+    body {
+        font-size: 22px;
+    }
+
+    #game {
+        max-width: 90%;
+        max-height: unset;
+        font-size: 1rem;
+    }
+
+    button{
+        padding: 9px 11px;
+        font-size: 18px;
+    }
+
+    #controls,
+    #stats,
+    #monsterStats {
+        padding: 8px;
+    }
+}
+
+/* Para orientación Landscape (horizontal) */
+@media (orientation: landscape) and (min-width: 768px) {
+    body {
+        justify-content: space-around;
+    }
+
+    #game {
+        max-width: 80%;
+    }
+
+    #controls,
+    #stats,
+    #monsterStats {
+        padding: 12px;
+    }
+}
+
+/* Para orientación Portrait (vertical) */
+@media (orientation: portrait) and (min-width: 768px) {
+    body {
+        justify-content: center;
+    }
+
+    #game {
+        max-width: 90%;
+    }
+
+    #controls,
+    #stats,
+    #monsterStats {
+        padding: 8px;
+    }
 }

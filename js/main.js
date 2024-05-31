@@ -153,7 +153,7 @@ function buyWeapon(){
             armaActual++;
             textoOro.innerText = oro;
             let newWeapon = weapons[armaActual].name;
-            texto.innerText = "Compraste una nueva arma: " + newWeapon + ".";
+            texto.innerText = "Compraste una nueva arma: " + newWeapon + ". ";
             inventario.push(newWeapon);
             texto.innerText += "Ahora tenes: "+ inventario;
         }else{
@@ -205,7 +205,7 @@ function goFight(){
 }
 
 function attack(){
-    texto.innerText = "El "+ monsters[luchando].name + " ataca.";
+    texto.innerText = "El "+ monsters[luchando].name + " ataca. ";
     texto.innerText += "Y vos lo atacas con tu: " + weapons[armaActual].name + ".";
     salud -= monsters[luchando].level;
     saludMonstruo -= weapons[armaActual].power + Math.floor(Math.random()* exp)+1;
